@@ -58,7 +58,8 @@ class GP8413LightController:
         self.device_name = device_name
         self.fade_duration = fade_duration
         self.is_on = False
-        self.brightness = 255  # 0-255
+        self.brightness = 1  # 0-255
+        self._last_brightness = 1  # Store last brightness before turning off
         self._current_voltage = 0.0
         self._target_voltage = 0.0
         self._fade_lock = threading.Lock()
@@ -89,7 +90,13 @@ class GP8413LightController:
             self.is_on = True
             if brightness is not None:
                 self.brightness = max(0, min(255, brightness))
+                # Update last brightness when explicitly set
+                if self.brightness > 0:
+                    self._last_brightness = self.brightness
         elif state.upper() == "OFF":
+            # Store current brightness before turning off (if it was on)
+            if self.is_on and self.brightness > 0:
+                self._last_brightness = self.brightness
             self.is_on = False
             self.brightness = 0
 
@@ -290,7 +297,8 @@ def on_message(
     # If brightness not provided, use current brightness for ON, 0 for OFF
     if brightness is None:
         if state == "ON":
-            brightness = controller.brightness if controller.brightness > 0 else 255
+            # Use current brightness if > 0, otherwise restore last brightness
+            brightness = controller.brightness if controller.brightness > 0 else controller._last_brightness
         else:
             brightness = 0
 
