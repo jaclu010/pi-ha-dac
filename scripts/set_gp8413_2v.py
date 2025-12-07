@@ -5,9 +5,7 @@ Drive a DFRobot Gravity GP8413 dual-channel DAC and set both outputs to 2 V.
 Prerequisites:
 1. Enable I2C on the Raspberry Pi and wire SDA/SCL to BCM pins 2/3 (or update
    the --sda-pin/--scl-pin flags).
-2. Download `DFRobot_GP8XXX.py` from
-   https://github.com/DFRobot/DFRobot_GP8XXX/blob/master/python/raspberryPi/DFRobot_GP8XXX.py
-   and place it next to this script or install it on the PYTHONPATH.
+2. DFRobot_GP8XXX.py should be in the same directory (included in repository).
 3. Run the script with sudo so RPi.GPIO can toggle the pins.
 """
 
@@ -22,9 +20,9 @@ try:
     from DFRobot_GP8XXX import DFRobot_GP8413
 except ImportError as exc:  # pragma: no cover - hardware import guard
     raise SystemExit(
-        "Unable to import DFRobot_GP8413. Download DFRobot_GP8XXX.py from "
-        "https://github.com/DFRobot/DFRobot_GP8XXX/blob/master/python/raspberryPi/DFRobot_GP8XXX.py "
-        "and place it alongside this script or add it to PYTHONPATH."
+        "Unable to import DFRobot_GP8413. Ensure DFRobot_GP8XXX.py is in the same "
+        "directory as this script or add it to PYTHONPATH. "
+        "The file is included in this repository."
     ) from exc
 
 

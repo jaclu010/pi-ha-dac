@@ -8,7 +8,7 @@ in Home Assistant. Both DAC channels are controlled together as a single light.
 Prerequisites:
 1. Install paho-mqtt: pip install paho-mqtt
 2. Enable I2C on the Raspberry Pi
-3. Download DFRobot_GP8XXX.py and place it next to this script
+3. DFRobot_GP8XXX.py should be in the same directory (included in repository)
 4. Run with sudo for GPIO access
 """
 
@@ -33,9 +33,9 @@ try:
     from DFRobot_GP8XXX import DFRobot_GP8413
 except ImportError as exc:
     raise SystemExit(
-        "Unable to import DFRobot_GP8413. Download DFRobot_GP8XXX.py from "
-        "https://github.com/DFRobot/DFRobot_GP8XXX/blob/master/python/raspberryPi/DFRobot_GP8XXX.py "
-        "and place it alongside this script or add it to PYTHONPATH."
+        "Unable to import DFRobot_GP8413. Ensure DFRobot_GP8XXX.py is in the same "
+        "directory as this script or add it to PYTHONPATH. "
+        "The file is included in this repository."
     ) from exc
 
 

@@ -7,8 +7,9 @@ This guide explains how to install the GP8413 Home Assistant integration as a sy
 - Raspberry Pi (or Linux system with systemd)
 - Python 3 installed
 - paho-mqtt library: `pip3 install paho-mqtt`
-- DFRobot_GP8XXX.py driver file
 - MQTT broker running (e.g., Mosquitto)
+
+Note: DFRobot_GP8XXX.py driver is included in this repository and will be installed automatically.
 
 ## Quick Installation
 
@@ -23,12 +24,7 @@ This guide explains how to install the GP8413 Home Assistant integration as a sy
    ```
    Update with your MQTT credentials and settings.
 
-3. **Ensure DFRobot_GP8XXX.py is in place:**
-   ```bash
-   sudo cp DFRobot_GP8XXX.py /opt/gp8413/
-   ```
-
-4. **Enable and start the service:**
+3. **Enable and start the service:**
    ```bash
    sudo systemctl enable gp8413-homeassistant
    sudo systemctl start gp8413-homeassistant
@@ -47,7 +43,7 @@ If you prefer to install manually:
    ```bash
    sudo cp scripts/gp8413_homeassistant.py /opt/gp8413/
    sudo cp scripts/gp8413-service-wrapper.sh /opt/gp8413/
-   sudo cp DFRobot_GP8XXX.py /opt/gp8413/
+   sudo cp scripts/DFRobot_GP8XXX.py /opt/gp8413/
    sudo chmod +x /opt/gp8413/gp8413_homeassistant.py
    sudo chmod +x /opt/gp8413/gp8413-service-wrapper.sh
    ```
@@ -130,7 +126,7 @@ sudo systemctl restart gp8413-homeassistant
 
 **Service won't start:**
 - Check logs: `sudo journalctl -u gp8413-homeassistant -n 50`
-- Verify DFRobot_GP8XXX.py is in `/opt/gp8413/`
+- Verify all files were copied to `/opt/gp8413/` (including DFRobot_GP8XXX.py)
 - Check I2C is enabled: `sudo raspi-config` → Interface Options → I2C
 - Verify MQTT broker is running: `sudo systemctl status mosquitto`
 

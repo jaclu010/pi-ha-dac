@@ -17,6 +17,7 @@ The GP8413 is a 15-bit I2C DAC that can output 0-5V or 0-10V on two channels. Th
 ├── scripts/
 │   ├── gp8413_homeassistant.py      # Main Home Assistant integration script
 │   ├── set_gp8413_2v.py             # Simple script to set both channels to 2V
+│   ├── DFRobot_GP8XXX.py            # DFRobot driver library (included)
 │   ├── gp8413-homeassistant.service.template  # Systemd service template
 │   ├── gp8413-service-wrapper.sh    # Service wrapper script
 │   ├── gp8413-config.env.example    # Configuration template
@@ -38,7 +39,7 @@ The GP8413 is a 15-bit I2C DAC that can output 0-5V or 0-10V on two channels. Th
 - Python 3
 - paho-mqtt: `pip3 install paho-mqtt`
 - RPi.GPIO (for Raspberry Pi GPIO access)
-- DFRobot_GP8XXX.py driver (from DFRobot GitHub repository)
+- DFRobot_GP8XXX.py driver (included in this repository)
 
 ## Key Components
 
@@ -150,9 +151,9 @@ The controller uses threading locks to prevent race conditions when:
 
 **Service won't start:**
 - Check logs: `sudo journalctl -u gp8413-homeassistant -n 50`
-- Verify DFRobot_GP8XXX.py is in `/opt/gp8413/`
 - Ensure I2C is enabled: `sudo raspi-config`
 - Check MQTT broker is running
+- Verify all files were copied during installation
 
 **Brightness slider not working:**
 - Verify the script handles numeric-only payloads (fixed in current version)
@@ -162,12 +163,24 @@ The controller uses threading locks to prevent race conditions when:
 - Service must run as root for GPIO access
 - Ensure script is executable
 
-## Related Files
+## Credits
 
-- **DFRobot Driver**: https://github.com/DFRobot/DFRobot_GP8XXX/blob/master/python/raspberryPi/DFRobot_GP8XXX.py
+This project includes the DFRobot GP8XXX driver library:
+
+- **DFRobot_GP8XXX.py**: Copyright (c) 2010 DFRobot Co.Ltd
+  - Licensed under MIT License
+  - Author: fary (feng.yang@dfrobot.com)
+  - Source: https://github.com/DFRobot/DFRobot_GP8XXX
+  - Original file: https://github.com/DFRobot/DFRobot_GP8XXX/blob/master/python/raspberryPi/DFRobot_GP8XXX.py
+
+## Related Links
+
+- **DFRobot GP8XXX Repository**: https://github.com/DFRobot/DFRobot_GP8XXX
 - **GP8413 Documentation**: https://wiki.dfrobot.com/SKU_DFR1073_2_Channel_15bit_I2C_to_0-10V_DAC
 
 ## License
 
 This project is provided as-is for use with DFRobot GP8413 hardware.
+
+The included DFRobot_GP8XXX.py driver is licensed under the MIT License by DFRobot Co.Ltd.
 
