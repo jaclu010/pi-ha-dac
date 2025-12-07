@@ -35,7 +35,6 @@ ENV/
 .DS_Store
 
 # Project specific
-DFRobot_GP8XXX.py
 *.log
 *.pid
 
