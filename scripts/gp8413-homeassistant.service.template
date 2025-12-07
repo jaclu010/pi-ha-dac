@@ -1,0 +1,23 @@
+[Unit]
+Description=GP8413 Home Assistant MQTT Light Controller
+After=network.target mosquitto.service
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/gp8413
+ExecStart=/opt/gp8413/gp8413-service-wrapper.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=gp8413-light
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
